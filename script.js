@@ -1257,31 +1257,29 @@ board.addEventListener('touchstart', (e) => {
     touchStartY = e.touches[0].clientY;
 }, { passive: false });
 
-board.addEventListener('touchmove', (e) => {
+board.addEventListener('touchend', (e) => {
     if (!touchStartX || !touchStartY) {
         return;
     }
     e.preventDefault();
 
-    let touchEndX = e.touches[0].clientX;
-    let touchEndY = e.touches[0].clientY;
+    // Use changedTouches because e.touches is empty on touchend
+    let touchEndX = e.changedTouches[0].clientX;
+    let touchEndY = e.changedTouches[0].clientY;
 
     let diffX = touchEndX - touchStartX;
     let diffY = touchEndY - touchStartY;
 
     const swipeThreshold = 30; // Min distance for a swipe to be registered
 
+    // Determine if it was a horizontal or vertical swipe
     if (Math.abs(diffX) > Math.abs(diffY)) { // Horizontal swipe
-        if (Math.abs(diffX) > swipeThreshold) {
-            setDirection(diffX > 0 ? 'right' : 'left');
-        }
+        if (Math.abs(diffX) > swipeThreshold) setDirection(diffX > 0 ? 'right' : 'left');
     } else { // Vertical swipe
-        if (Math.abs(diffY) > swipeThreshold) {
-            setDirection(diffY > 0 ? 'down' : 'up');
-        }
+        if (Math.abs(diffY) > swipeThreshold) setDirection(diffY > 0 ? 'down' : 'up');
     }
 
-    // Reset after processing the swipe to register the next one
+    // Reset the start coordinates for the next swipe
     touchStartX = 0;
     touchStartY = 0;
 }, { passive: false });
