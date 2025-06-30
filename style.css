@@ -325,9 +325,14 @@ body {
 
     .scores {
         min-width: 0;
-        flex-direction: column;
+        flex-direction: row;
         gap: 10px;
-        align-items: center;
+        justify-content: center;
+    }
+
+    .score-item {
+        min-width: auto;
+        /* Allow items to shrink to fit their content */
     }
 
     .game-board-container {
