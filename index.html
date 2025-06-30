@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>SNAKE</h1>
+            <div class="scores">
+                <div class="score-item">SCORE: <span id="current-score">0</span></div>
+                <div class="score-item">STATUS: <span id="status-effect">NORMAL</span></div>
+                <div class="score-item">HIGH SCORE: <span id="high-score">0</span></div>
+            </div>
+        </div>
+        <div class="game-board-container">
+            <canvas id="game-board" width="400" height="400"></canvas>
+            <div id="start-menu-overlay">
+                <p>CHOOSE YOUR SNAKE</p>
+                <div class="skin-options">
+                    <button class="skin-btn active" data-skin="cyan">CYAN</button>
+                    <button class="skin-btn" data-skin="crimson">CRIMSON</button>
+                    <button class="skin-btn" data-skin="gold">GOLD</button>
+                </div>
+                <p>CHOOSE DIFFICULTY</p>
+                <div class="difficulty-options">
+                    <button class="difficulty-btn" data-difficulty="easy">EASY</button>
+                    <button class="difficulty-btn" data-difficulty="medium">MEDIUM</button>
+                    <button class="difficulty-btn" data-difficulty="hard">HARD</button>
+                </div>
+            </div>
+            <div id="game-over-overlay" class="hidden">
+                <p id="game-over-text">GAME OVER</p>
+                <p class="final-score-text">FINAL SCORE: <span id="final-score">0</span></p>
+                <div class="stats-summary">
+                    <p class="stat-item">Food Eaten: <span id="stat-food-eaten">0</span></p>
+                    <p class="stat-item">Longest Length: <span id="stat-longest-length">0</span></p>
+                    <p class="stat-item">Boosts Used: <span id="stat-boosts">0</span></p>
+                </div>
+                <button id="restart-button">RESTART</button>
+            </div>
+            <div id="pause-menu-overlay" class="hidden">
+                <p id="pause-text">PAUSED</p>
+                <button id="resume-button">RESUME</button>
+                <button id="pause-restart-button">RESTART</button>
+                <button id="quit-button">QUIT</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

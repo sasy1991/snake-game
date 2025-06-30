@@ -1,0 +1,346 @@
+body {
+    background-color: #111827;
+    /* Dark Slate */
+    color: #fafafa;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.game-container.shake {
+    animation: shake 0.5s cubic-bezier(.36, .07, .19, .97) both;
+}
+
+.header h1 {
+    font-size: 3rem;
+    color: #22d3ee;
+    /* Vibrant Cyan */
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+}
+
+.scores {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 1rem;
+    min-width: 500px;
+}
+
+.score-item {
+    background-color: #1f2937;
+    /* Lighter Slate */
+    padding: 10px;
+    border-radius: 8px;
+    min-width: 150px;
+}
+
+.score-item span {
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.score-item.score-multiplier-active span {
+    color: #a78bfa;
+    /* Vibrant Purple */
+    animation: pulse-glow-purple 1.5s infinite ease-in-out;
+}
+
+.score-item.status-active span {
+    color: #67e8f9;
+    /* Lighter Cyan */
+    animation: pulse-glow-cyan 1.5s infinite ease-in-out;
+}
+
+.game-board-container {
+    position: relative;
+}
+
+#game-board {
+    background-color: #0c121e;
+    /* Darker Slate */
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(34, 211, 238, 0.2);
+    /* Cyan Glow */
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+#game-board.speed-boost-active {
+    box-shadow: 0 0 35px rgba(250, 204, 21, 0.7);
+    /* Gold/Yellow Glow */
+}
+
+#game-board.poisoned-active {
+    box-shadow: 0 0 35px rgba(124, 179, 66, 0.7);
+    /* Sickly Green Glow */
+}
+
+#start-menu-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(12, 18, 30, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    color: #fafafa;
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#start-menu-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.skin-options {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.skin-btn.locked {
+    background-color: #374151;
+    color: #6b7280;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.skin-btn.locked:hover {
+    background-color: #374151;
+    transform: none;
+}
+
+.difficulty-options {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+#pause-menu-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(12, 18, 30, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    gap: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+#pause-menu-overlay:not(.hidden) {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#pause-menu-overlay.hidden {
+    opacity: 0;
+}
+
+#pause-text {
+    font-size: 2.5rem;
+    color: #fafafa;
+    font-weight: 600;
+}
+
+#game-over-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    pointer-events: none;
+}
+
+#game-over-overlay.hidden {
+    /* This class is now mostly for semantic purposes, as the initial state is already hidden */
+}
+
+#game-over-overlay:not(.hidden) {
+    opacity: 1;
+    pointer-events: all;
+}
+
+#game-over-text {
+    font-size: 2.5rem;
+    color: #f472b6;
+    /* Vibrant Pink */
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.final-score-text {
+    font-size: 1.2rem;
+    color: #fafafa;
+    margin-bottom: 25px;
+}
+
+.stats-summary {
+    margin-bottom: 25px;
+    text-align: left;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px 20px;
+    border-radius: 8px;
+    width: 250px;
+}
+
+.stat-item {
+    font-size: 1rem;
+    margin: 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 400;
+}
+
+#restart-button,
+.difficulty-btn,
+.skin-btn,
+#resume-button,
+#pause-restart-button,
+#quit-button {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    background-color: #22d3ee;
+    color: #111827;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    opacity: 0.7;
+}
+
+#restart-button:hover,
+.difficulty-btn:hover,
+.skin-btn:hover,
+.skin-btn.active,
+#resume-button:hover,
+#pause-restart-button:hover,
+#quit-button:hover {
+    background-color: #67e8f9;
+    /* Lighter Cyan */
+    transform: translateY(-2px);
+    opacity: 1;
+}
+
+@keyframes shake {
+
+    10%,
+    90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%,
+    80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%,
+    50%,
+    70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%,
+    60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+@keyframes pulse-glow-purple {
+    0% {
+        text-shadow: 0 0 8px #a78bfa;
+    }
+
+    50% {
+        text-shadow: 0 0 16px #a78bfa, 0 0 20px #a78bfa;
+    }
+
+    100% {
+        text-shadow: 0 0 8px #a78bfa;
+    }
+}
+
+@keyframes pulse-glow-cyan {
+    0% {
+        text-shadow: 0 0 5px #67e8f9;
+    }
+
+    50% {
+        text-shadow: 0 0 15px #67e8f9;
+    }
+
+    100% {
+        text-shadow: 0 0 5px #67e8f9;
+    }
+}
+
+/* We can remove the retro pulse animation for a cleaner look */
+/* @keyframes gameOverPulse ... */
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 520px) {
+    .game-container {
+        width: 100%;
+        padding: 0 15px;
+        box-sizing: border-box;
+        /* Ensures padding doesn't add to the width */
+    }
+
+    .header h1 {
+        font-size: 2.5rem;
+    }
+
+    .scores {
+        min-width: 0;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .game-board-container {
+        width: 100%;
+        /* Make the board container responsive */
+        max-width: 400px;
+        /* But don't let it get bigger than the canvas's native size */
+    }
+
+    #game-board {
+        width: 100%;
+        /* Make the canvas fill its container */
+        height: auto;
+        /* Maintain aspect ratio */
+    }
+}
